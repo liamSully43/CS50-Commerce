@@ -1,0 +1,20 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Add a New Listing</h2>
+    
+    <div id="form-container">
+        <form action="/create-listing", method="POST">
+            {% csrf_token %}
+            {{ form }} <!-- form created in python when path is requested -->
+            <button type="submit">Create</button>
+        </form>
+        <img id="image-preview" src="" />
+    </div>
+
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+
+    <script type="text/javascript" src="../../static/auctions/form.js"></script>
+{% endblock %}
