@@ -1,0 +1,317 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: arial, sans-serif;
+}
+
+body {
+    padding: 10px;
+}
+
+a, a:visited {
+    color: #009966;
+}
+
+a:hover {
+    color: #00704b;
+}
+
+.listings, .listings:visited {
+    width: 700px;
+    min-height: 100px;
+    border: solid 1px lightgrey;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    display: flex;
+    color: #212121;
+    text-decoration: none;
+    margin-left: 50px;
+}
+
+.listings:hover {
+    background-color: #f7f7f7;
+    color: #212121;
+    text-decoration: none;
+}
+
+.listings img {
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.listing-details {
+    display: flex;
+}
+
+.listing-details p {
+    margin: 0px;
+    margin-left: 20px;
+    margin-top: 8px;
+}
+
+main {
+    position: relative;
+}
+
+.line {
+    width: 2px;
+    height: 100%;
+    background-color: grey;
+    margin-left: 20px;
+    position: absolute;
+}
+
+.marker {
+    width: 20px;
+    height: 20px;
+    border: solid 3px #009966;
+    border-radius: 100%;
+    position: sticky;
+    top: 170px;
+    margin-left: -9px;
+    margin-top: -10px;
+}
+
+#form-container {
+    width: 90vw;
+    display: flex;
+}
+
+form {
+    display: grid;
+    flex-basis: 50%;
+}
+
+form textarea {
+    height: 200px;
+}
+
+form button {
+    margin-top: 20px;
+}
+
+#image-preview {
+    width: 600px;
+    height: 400px;
+    margin-left: 50px;
+    margin-top: 32px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+#image-preview {
+    opacity: 0;
+}
+
+#image-preview[src$='.png'], #image-preview[src$='.jpg'], #image-preview[src$='.gif'] {
+    opacity: 1;
+}
+
+.category {
+    position: relative;
+    bottom: 2px;
+    left: 10px;
+    font-size: 10px;
+    background-color: lightgrey;
+    border: solid 1px grey;
+    color:grey;
+    border-radius: 10px;
+    padding: 0px 5px 1px 5px;
+}
+
+#listing-info {
+    display: flex;
+}
+
+#listing-info img {
+    object-fit: cover;
+}
+
+#listing-details {
+    margin-left: 30px;
+}
+
+#listing-details table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#listing-details td, #listing-details th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+#listing-details th {
+    background-color: #ddd;
+}
+
+#user-bid {
+    width: 210px;
+}
+
+#bid-form input[type=submit] {
+    width: 210px;
+    margin: 10px 0px;
+}
+
+#watchlist-form input {
+    display: none;
+}
+
+#watchlist-form button {
+    position: relative;
+    width: 210px;
+    border: solid 1px #00704b;
+    border-radius: 20px;
+    background-color: #009966;
+    color: #fff;
+    margin-top: 5px;
+}
+
+#watchlist-form button:hover {
+    background-color: #00704b;
+    cursor: pointer;
+}
+
+#eye {
+    position: absolute;
+    left: 30px;
+    top: 5px;
+}
+
+#eye #eye-lid {
+    position: absolute;
+    left: -18px;
+    width: 22px;
+    height: 13px;
+    border: 2px solid transparent;
+    border-radius: 100%;
+    border-top-color: #fff;
+    border-bottom-color: #fff;
+}
+
+#eye #iris {
+    position: absolute;
+    top: 3px;
+    width: 7px;
+    height: 7px;
+    background-color: #009966;
+    border: solid 2px #fff;
+    border-radius: 50%;
+    left: -10px;
+}
+
+#comment-section {
+    width: 45vw;
+    margin-top: 50px;
+    box-shadow: 0px 0px 20px #dedede;
+}
+
+#add-comment {
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    box-sizing: border-box;
+    position: sticky;
+    top: 0px;
+}
+
+#add-comment textarea {
+    border-color: lightgrey;
+    height: 80px;
+    padding: 5px;
+}
+
+#comments {
+    padding-bottom: 10px;
+}
+
+.comment {
+    margin: 0px 20px 10px 20px;
+    border: solid 1px lightgrey;
+    border-radius: 10px;
+    padding: 10px;
+    padding-bottom: 25px;
+}
+
+.comment h3 {
+    font-size: 18px;
+}
+
+.comment p {
+    margin-bottom: 0px;
+}
+
+.comment-time {
+    color: darkgrey;
+    font-size: 13px;
+    font-weight: 100;
+    float: right;
+}
+
+#bid-item-login {
+    padding: 5px 20px;
+    width: 210px;
+    border: solid 1px #00704b;
+    border-radius: 20px;
+    background-color: #009966;
+    color: #fff;
+}
+
+#bid-item-login:hover {
+    background-color: #00704b;
+    text-decoration: none;
+}
+
+#listing-id-comments {
+    display: none;
+}
+
+#listing-ui {
+    display: flex;
+}
+
+#listing-ui div {
+    flex-basis: 50%;
+}
+
+#close-listing {
+    padding: 5px 10px;
+    background-color: rgb(192, 0, 26);
+    border-radius: 20px;
+    color: white;
+    border: solid 1px rgb(160, 0, 21);
+    text-decoration: none;
+}
+
+#close-listing:hover {
+    background-color: rgb(160, 0, 21);
+}
+
+#category-container {
+    margin-bottom: 20px;
+}
+
+.categories {
+    display: inline;
+}
+
+.categories input {
+    font-size: 16px;
+    background-color: lightgrey;
+    border: solid 1px grey;
+    color:grey;
+    border-radius: 10px;
+    padding: 0px 10px;
+}
+
+.categories input:hover {
+    background-color: grey;
+    color: #fff;
+}
+
+#no-comments {
+    padding: 20px 0px 0px 20px;
+}

@@ -1,0 +1,25 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    <main>
+        <div class="line">
+            <div class="marker"></div>
+        </div>
+        {% for listing in listings %}
+            <a href="/listing/{{ listing.id }}" class="listings">
+                <!-- if no image is provided, don't render an img tag -->
+                {% if listing.image %}
+                    <img src="{{ listing.image }}" width="100" height="100" />
+                {% endif %}
+                <div class="listing-body">
+                    <div class="listing-details">
+                        <h3>{{ listing.title }}</h3>
+                        <p>£{{ listing.current_bid }} <span class="category">{{ listing.category }}</span></p>
+                    </div>
+                    <p>{{ listing.description }}</p>
+                </div>
+            </a>
+        {% endfor %}
+    </main>
+{% endblock %}

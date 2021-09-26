@@ -1,0 +1,112 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    {% if listing %}
+        <h2>{{ listing.title }} <span class="category">{{ listing.category }}</span></h2>
+
+        <div id="listing-info">
+            <img width="600px" height="400px" src="{{ listing.image }}" />
+            <div id="listing-details">
+                <p>{{ listing.description }}</p>
+                <br />
+                <!-- listing details -->
+                <table>
+                    <tr>
+                        <th>Starting Bid</th>
+                        <th>Current Bid</th>
+                    </tr>
+                    <tr>
+                        <td>£{{ listing.starting_bid }}</td>
+                        <td>£{{ listing.current_bid }}</td>
+                    </tr>
+                    <tr>
+                        <th>Bid Start Time</th>
+                        <th>Bid End Time</th>
+                    </tr>
+                    <tr>
+                        <td>{{ listing.start_time_date }}</td>
+                        <td>{{ listing.end_time_date }}</td>
+                    </tr>
+                </table>
+                <br />
+                {% if active %} <!-- show this content if the listing is currently active -->
+                    {% if user.is_authenticated %}
+                        <section id="listing-ui">
+                            <div>
+                                <p>The minimum bid is £{{ listing.current_bid }}</p>
+                                <!-- the form is added using HTML instead of Python because it only has one field which has loads of attributes -->
+                                {% if active %}
+                                    <form id="bid-form" action="/bid/{{ listing.id }}" method="POST">
+                                        {% csrf_token %}
+                                        <input id="user-bid" name="bid" type="number" placeholder="Your Bid, minimum £{{ listing.current_bid }}" min="{{ listing.current_bid }}" />
+                                        <input type="submit" />
+                                    </form>
+                                {% endif %}
+                                <form id="watchlist-form" action="/watchlist" method="POST">
+                                    {% csrf_token %}
+                                    <!-- toggle listing on watchlist -->
+                                    {% if on_watchlist %}
+                                        <input value="remove" name="toggle" />
+                                        <input value="{{ listing.id }}" name="listing_id" />
+                                        <button type="submit">
+                                            Remove from watchlist
+                                        </button>
+                                    {% else %}
+                                        <input value="add" name="toggle" />
+                                        <input value="{{ listing.id }}" name="listing_id" />
+                                        <button type="submit">
+                                            <span id="eye">
+                                                <i id="eye-lid"></i>
+                                                <div id="iris"></div>
+                                            </span>
+                                            Add to watchlist
+                                        </button>
+                                    {% endif %}
+                                </form>
+                            </div>
+                            <div>
+                                {% if listing_owner %}
+                                    <a id="close-listing" href="/close-listing/{{ listing.id }}">Close Listing</a>
+                                {% endif %}
+                            </div>
+                        </section>
+                    {% else %}
+                        <a href="/login" id="bid-item-login">Bid on item</a>
+                    {% endif %}
+                {% else %} <!-- show this content if the listing is no longer active -->
+                    <p>This listing is now closed.</p>
+                    {% if winner %} <!-- show this message if the logged in user is the largest bidder -->
+                        <p>Congratulations! You have won the auction with the winning bid of £{{ listing.current_bid }}</p>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+        <!-- comment section -->
+        <div id="comment-section">
+            <!-- Add a comment to the listing -->
+            {% if user.is_authenticated %}
+                <form id="add-comment" method="POST" action="/comment">
+                    {% csrf_token %}
+                    <input value="{{ listing.id }}" name="listing_id" id="listing-id-comments" />
+                    {{ comment_form }}
+                    <input type="submit" />
+                </form>
+            {% endif %}
+             <!-- list comments -->
+            <section id="comments">
+                {% for comment in comments  %}
+                    <div class="comment">
+                        <h3>{{ comment.name }}</h3>
+                        <p>{{ comment.comment }}</p>
+                        <span class="comment-time">{{ comment.date }}</span>
+                    </div>
+                {% empty %}
+                    <p id="no-comments">No comments.</p>
+                {% endfor %}
+            </section>
+        </div>
+    {% else %}
+        <p>That listing does not exists</p>
+    {% endif %}
+
+{% endblock %}
